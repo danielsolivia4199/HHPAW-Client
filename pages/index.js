@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
@@ -15,10 +16,16 @@ function Home() {
       }}
     >
       <h1>Hello {user.fbUser.displayName}! </h1>
-      <p>Your Bio: {user.bio}</p>
-      <p>Click the button below to logout!</p>
+      <Link href="/orders" passHref>
+        <Button variant="danger" type="button" size="lg" className="copy-btn">
+          View Orders
+        </Button>
+      </Link>
       <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Sign Out
+        Create Order
+      </Button>
+      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+        View Revenue
       </Button>
     </div>
   );
