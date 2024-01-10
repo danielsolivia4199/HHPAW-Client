@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
+import Link from 'next/link';
 
 /* NOTES:
 Buttons not functioning, need onClick
@@ -18,7 +19,9 @@ export default function OrderCard({ orderObj }) {
           <Card.Text>
             Status: {orderObj.is_closed ? 'Closed' : 'Open'}
           </Card.Text>
-          <Button variant="primary">Order Details</Button>
+          <Link href={`/orders/${orderObj.id}`} passHref>
+            <Button variant="primary" as="a">Order Details</Button>
+          </Link>
           <Button variant="primary">Edit</Button>
           <Button variant="primary">Delete</Button>
         </Card.Body>
@@ -29,6 +32,7 @@ export default function OrderCard({ orderObj }) {
 
 OrderCard.propTypes = {
   orderObj: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     customer_name: PropTypes.string.isRequired,
     customer_email: PropTypes.string.isRequired,
     customer_phone: PropTypes.string.isRequired,
