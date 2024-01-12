@@ -36,7 +36,7 @@ const OrderDetails = () => {
 
   return (
     <div>
-      <h2>Order Details for Order ID: {id}</h2>
+      <h2>Order Details for Order: {id}</h2>
       {orderItems.map((orderItem) => (
         <ItemCard key={orderItem.id} item={orderItem.item} />
       ))}

@@ -36,7 +36,7 @@ OrderCard.propTypes = {
     customer_name: PropTypes.string.isRequired,
     customer_email: PropTypes.string.isRequired,
     customer_phone: PropTypes.string.isRequired,
-    order_type: PropTypes.number.isRequired,
+    order_type: PropTypes.string.isRequired,
     is_closed: PropTypes.bool.isRequired,
   }).isRequired,
 };

@@ -21,9 +21,11 @@ function Home() {
           View Orders
         </Button>
       </Link>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        Create Order
-      </Button>
+      <Link href="/orders/new" passHref>
+        <Button variant="danger" type="button" size="lg" className="copy-btn">
+          Create Order
+        </Button>
+      </Link>
       <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
         View Revenue
       </Button>

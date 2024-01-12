@@ -17,7 +17,7 @@ function Home() {
     <article className="orders">
       <h1>Orders</h1>
       {orders.map((order) => (
-        <section key={`game--${order.id}`} className="order">
+        <section key={`order--${order.id}`} className="order">
           <OrderCard orderObj={order} onUpdate={getAllOrders} />
         </section>
       ))}
