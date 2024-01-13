@@ -2,12 +2,22 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { deleteOrder } from '../../utils/data/orderData';
 
 /* NOTES:
 Buttons not functioning, need onClick
 */
 
-export default function OrderCard({ orderObj }) {
+export default function OrderCard({ orderObj, onUpdate }) {
+  const router = useRouter();
+
+  const deleteThisOrder = () => {
+    if (window.confirm('Delete this order?')) {
+      deleteOrder(orderObj.id).then(() => onUpdate());
+    }
+  };
+
   return (
     <>
       <Card className="text-center">
@@ -22,8 +32,14 @@ export default function OrderCard({ orderObj }) {
           <Link href={`/orders/${orderObj.id}`} passHref>
             <Button variant="primary" as="a">Order Details</Button>
           </Link>
-          <Button variant="primary">Edit</Button>
-          <Button variant="primary">Delete</Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              router.push(`/orders/edit/${orderObj.id}`);
+            }}
+          >Edit
+          </Button>
+          <Button variant="primary" onClick={deleteThisOrder}>Delete</Button>
         </Card.Body>
       </Card>
     </>
@@ -39,4 +55,5 @@ OrderCard.propTypes = {
     order_type: PropTypes.string.isRequired,
     is_closed: PropTypes.bool.isRequired,
   }).isRequired,
+  onUpdate: PropTypes.func.isRequired,
 };

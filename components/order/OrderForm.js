@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
@@ -22,11 +23,11 @@ const OrderForm = ({ orderObj }) => {
     if (orderObj.id) {
       setCurrentOrder({
         id: orderObj.id,
-        customerName: orderObj.customerName,
-        customerEmail: orderObj.customerEmail,
-        customerPhone: orderObj.customerPhone,
-        orderType: orderObj.orderType,
-        isClosed: orderObj.isClosed, // Update based on actual status
+        customerName: orderObj.customer_name,
+        customerEmail: orderObj.customer_email,
+        customerPhone: orderObj.customer_phone,
+        orderType: orderObj.order_type,
+        isClosed: orderObj.is_closed,
       });
     }
   }, [orderObj]);
@@ -43,9 +44,9 @@ const OrderForm = ({ orderObj }) => {
     e.preventDefault();
     try {
       if (orderObj.id) {
-        await updateOrder(currentOrder, user.uid); // user.uid is sent as the employee UID
+        await updateOrder(currentOrder, user.uid);
       } else {
-        await createOrder(currentOrder, user.uid); // user.uid is sent as the employee UID
+        await createOrder(currentOrder, user.uid);
       }
       router.push('/orders');
     } catch (error) {
@@ -55,6 +56,7 @@ const OrderForm = ({ orderObj }) => {
 
   return (
     <>
+      <h3>{orderObj.id ? 'Update Order' : 'Create Order'}</h3>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Cutsomer Name</Form.Label>
