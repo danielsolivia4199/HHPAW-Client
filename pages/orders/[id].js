@@ -38,12 +38,12 @@ const OrderDetails = () => {
 
   return (
     <div>
-      <h2>Order Details for Order: {id}</h2>
+      <h2>Details for Order #{id}</h2>
       <Link href={`/items/menu?orderId=${id}`} passHref>
         <Button variant="primary" as="a">Add Item</Button>
       </Link>
       {orderItems.map((orderItem) => (
-        <ItemCard key={orderItem.id} item={orderItem.item} />
+        <ItemCard key={orderItem.id} item={orderItem.item} showAddButton={false} />
       ))}
 
     </div>

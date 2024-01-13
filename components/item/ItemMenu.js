@@ -42,7 +42,7 @@ const ItemsMenu = () => {
       <h2>Menu</h2>
       <Button onClick={handleReturnToOrder} variant="secondary">Return to Order</Button>
       {items.map((item) => (
-        <ItemCard key={item.id} item={item} onAddToOrder={() => addItemToOrder(orderId, item.id)} />
+        <ItemCard key={item.id} item={item} showAddButton onAddToOrder={() => addItemToOrder(orderId, item.id)} />
       ))}
     </div>
   );

@@ -45,10 +45,11 @@ const OrderForm = ({ orderObj }) => {
     try {
       if (orderObj.id) {
         await updateOrder(currentOrder, user.uid);
+        router.push(`/orders/${orderObj.id}`);
       } else {
-        await createOrder(currentOrder, user.uid);
+        const newOrder = await createOrder(currentOrder, user.uid);
+        router.push(`/orders/${newOrder.id}`);
       }
-      router.push('/orders');
     } catch (error) {
       console.error('Error submitting the order:', error);
     }
