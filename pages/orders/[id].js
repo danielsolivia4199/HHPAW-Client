@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import getOrderItems from '../../utils/data/orderItemData';
+import Link from 'next/link';
+import { Button } from 'react-bootstrap';
+import { getOrderItems } from '../../utils/data/orderItemData';
 import ItemCard from '../../components/item/ItemCard';
 
 const OrderDetails = () => {
   const router = useRouter();
-  const { id } = router.query; // Retrieve the dynamic id from the URL
+  const { id } = router.query;
   const [orderItems, setOrderItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (id) { // Ensure id is not undefined
+    if (id) {
       getOrderItems(id)
         .then((items) => {
           setOrderItems(items);
@@ -37,6 +39,9 @@ const OrderDetails = () => {
   return (
     <div>
       <h2>Order Details for Order: {id}</h2>
+      <Link href={`/items/menu?orderId=${id}`} passHref>
+        <Button variant="primary" as="a">Add Item</Button>
+      </Link>
       {orderItems.map((orderItem) => (
         <ItemCard key={orderItem.id} item={orderItem.item} />
       ))}

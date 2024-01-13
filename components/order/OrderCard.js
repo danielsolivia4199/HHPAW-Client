@@ -5,10 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { deleteOrder } from '../../utils/data/orderData';
 
-/* NOTES:
-Buttons not functioning, need onClick
-*/
-
 export default function OrderCard({ orderObj, onUpdate }) {
   const router = useRouter();
 
@@ -21,8 +17,9 @@ export default function OrderCard({ orderObj, onUpdate }) {
   return (
     <>
       <Card className="text-center">
-        <Card.Header>{orderObj.customer_name}</Card.Header>
+        <Card.Header>Order #{orderObj.id}</Card.Header>
         <Card.Body>
+          <Card.Title>{orderObj.customer_name}</Card.Title>
           <Card.Title>{orderObj.customer_email}</Card.Title>
           <Card.Text>{orderObj.customer_phone}</Card.Text>
           <Card.Text>{orderObj.order_type}</Card.Text>
