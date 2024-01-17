@@ -1,8 +1,9 @@
+/* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import { getOrderItems } from '../../utils/data/orderItemData';
+import { getOrderItems, deleteOrderItem } from '../../utils/data/orderItemData';
 import ItemCard from '../../components/item/ItemCard';
 
 const OrderDetails = () => {
@@ -28,6 +29,18 @@ const OrderDetails = () => {
     }
   }, [id]);
 
+  const handleDeleteFromOrder = (itemId) => {
+    deleteOrderItem(itemId) // Assuming deleteOrderItem is your API call to delete the item
+      .then(() => {
+        // Update the state to reflect the deletion
+        setOrderItems(orderItems.filter((item) => item.id !== itemId));
+      })
+      .catch((error) => {
+        console.error('Error deleting order item:', error);
+        setError(error);
+      });
+  };
+
   if (loading) {
     return <p>Loading order details...</p>;
   }
@@ -43,7 +56,13 @@ const OrderDetails = () => {
         <Button variant="primary" as="a">Add Item</Button>
       </Link>
       {orderItems.map((orderItem) => (
-        <ItemCard key={orderItem.id} item={orderItem.item} showAddButton={false} />
+        <ItemCard
+          key={orderItem.id}
+          item={orderItem.item}
+          showAddButton={false}
+          showDeleteButton
+          onDeleteFromOrder={() => handleDeleteFromOrder(orderItem.id)}
+        />
       ))}
 
     </div>

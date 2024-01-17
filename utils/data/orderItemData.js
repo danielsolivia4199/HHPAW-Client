@@ -19,7 +19,6 @@ const addItemToOrder = async (orderId, itemId) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // Include other headers as required, like authorization tokens
       },
       body: JSON.stringify({
         order_id: orderId,
@@ -32,11 +31,36 @@ const addItemToOrder = async (orderId, itemId) => {
     }
 
     const data = await response.json();
-    return data; // This is the response body from the server
+    return data;
   } catch (error) {
     console.error('Error adding item to order:', error);
-    // Handle errors appropriately in your application
   }
 };
 
-export { getOrderItems, addItemToOrder };
+const deleteOrderItem = async (orderItemId) => {
+  try {
+    const response = await fetch(`${clientCredentials.databaseURL}/orderitems/${orderItemId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Check if the response status is 204 (No Content)
+    if (response.status === 204) {
+      return; // Simply return as there's no content to parse
+    }
+
+    // eslint-disable-next-line consistent-return
+    return response.json(); // If your backend does return data, parse it
+  } catch (error) {
+    console.error('Error deleting order item:', error);
+    throw error;
+  }
+};
+
+export { getOrderItems, addItemToOrder, deleteOrderItem };
