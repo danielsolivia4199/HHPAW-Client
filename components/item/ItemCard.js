@@ -8,7 +8,6 @@ import { Card, Button } from 'react-bootstrap';
 export default function ItemCard({
   item, onAddToOrder, onDeleteFromOrder, showAddButton, showDeleteButton,
 }) {
-  // Call this function when the item is successfully added
   const notify = () => toast('Item added to order');
   const notifyDelete = () => toast('Item removed from order');
 

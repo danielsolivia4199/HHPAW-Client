@@ -30,9 +30,8 @@ const OrderDetails = () => {
   }, [id]);
 
   const handleDeleteFromOrder = (itemId) => {
-    deleteOrderItem(itemId) // Assuming deleteOrderItem is your API call to delete the item
+    deleteOrderItem(itemId)
       .then(() => {
-        // Update the state to reflect the deletion
         setOrderItems(orderItems.filter((item) => item.id !== itemId));
       })
       .catch((error) => {
