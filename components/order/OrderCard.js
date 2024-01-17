@@ -26,17 +26,21 @@ export default function OrderCard({ orderObj, onUpdate }) {
           <Card.Text>
             Status: {orderObj.is_closed ? 'Closed' : 'Open'}
           </Card.Text>
-          <Link href={`/orders/${orderObj.id}`} passHref>
-            <Button variant="primary" as="a">Order Details</Button>
-          </Link>
-          <Button
-            variant="primary"
-            onClick={() => {
-              router.push(`/orders/edit/${orderObj.id}`);
-            }}
-          >Edit
-          </Button>
-          <Button variant="primary" onClick={deleteThisOrder}>Delete</Button>
+          {!orderObj.is_closed && (
+            <>
+              <Link href={`/orders/${orderObj.id}`} passHref>
+                <Button variant="primary" as="a">Order Details</Button>
+              </Link>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  router.push(`/orders/edit/${orderObj.id}`);
+                }}
+              >Edit
+              </Button>
+              <Button variant="primary" onClick={deleteThisOrder}>Delete</Button>
+            </>
+          )}
         </Card.Body>
       </Card>
     </>

@@ -1,16 +1,19 @@
 /* eslint-disable react/prop-types */
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const CloseOrderModal = ({
   show, onHide, onSubmit, orderTotal,
 }) => {
   const [tip, setTip] = useState('');
   const [paymentType, setPaymentType] = useState('');
+  const router = useRouter();
 
   const handleSubmit = () => {
     onSubmit({ tip, paymentType });
     onHide();
+    router.push('/orders');
   };
 
   return (
@@ -20,6 +23,9 @@ const CloseOrderModal = ({
       </Modal.Header>
       <Modal.Body>
         <p>Order Total: ${orderTotal.toFixed(2)}</p>
+        {tip && !Number.isNaN(tip) && (
+        <p>Total with Tip: ${(orderTotal + parseFloat(tip)).toFixed(2)}</p>
+        )}
         <Form>
           <Form.Group>
             <Form.Label>Tip Amount</Form.Label>
