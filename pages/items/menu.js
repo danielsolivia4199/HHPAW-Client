@@ -1,4 +1,3 @@
-// In one of your page components
 import ItemsMenu from '../../components/item/ItemMenu';
 
 const Menu = () => (

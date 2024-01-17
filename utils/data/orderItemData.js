@@ -50,13 +50,12 @@ const deleteOrderItem = async (orderItemId) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // Check if the response status is 204 (No Content)
     if (response.status === 204) {
-      return; // Simply return as there's no content to parse
+      return;
     }
 
     // eslint-disable-next-line consistent-return
-    return response.json(); // If your backend does return data, parse it
+    return response.json();
   } catch (error) {
     console.error('Error deleting order item:', error);
     throw error;

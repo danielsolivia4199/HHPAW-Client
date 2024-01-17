@@ -1,5 +1,25 @@
 import { clientCredentials } from '../client';
 
+const getRevenues = () => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/revenues`, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then((data) => resolve(data))
+    .catch((error) => {
+      console.error('Error fetching revenue data:', error);
+      reject(error);
+    });
+});
+
 const createRevenue = (revenue) => new Promise((resolve, reject) => {
   console.log('Sending Revenue Data:', revenue); // Log data being sent
   fetch(`${clientCredentials.databaseURL}/revenues`, {
@@ -14,4 +34,4 @@ const createRevenue = (revenue) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export default createRevenue;
+export { getRevenues, createRevenue };

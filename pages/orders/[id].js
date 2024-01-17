@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getOrderItems, deleteOrderItem } from '../../utils/data/orderItemData';
 import { closeOrder } from '../../utils/data/orderData';
-import createRevenue from '../../utils/data/revenueData';
+import { createRevenue } from '../../utils/data/revenueData';
 import ItemCard from '../../components/item/ItemCard';
 import CloseOrderModal from '../../components/revenue/RevenueNode';
 
@@ -30,17 +30,16 @@ const OrderDetails = () => {
           order: parseInt(id, 10),
           tip_amount: parseFloat(tip).toFixed(2),
           payment_type: paymentType,
-          order_amount: orderTotal.toString(), // Assuming this is the total amount of the order
-          date: currentDate, // Current date and time
+          order_amount: orderTotal.toString(),
+          date: currentDate,
         };
 
         createRevenue(revenueData)
           .then(() => {
-            // Handle success
           })
           .catch((error) => {
             console.error('Error creating revenue record:', error);
-            setError(error); // Handle error
+            setError(error);
           });
       });
   };

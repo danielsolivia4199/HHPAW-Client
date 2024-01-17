@@ -66,9 +66,8 @@ const closeOrder = (orderId, uid) => new Promise((resolve, reject) => {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `${uid}`, // if needed
+      Authorization: `${uid}`,
     },
-    // No body needed for closing the order
   })
     .then((response) => {
       if (!response.ok) {

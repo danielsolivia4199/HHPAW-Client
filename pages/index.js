@@ -26,9 +26,14 @@ function Home() {
           Create Order
         </Button>
       </Link>
-      <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-        View Revenue
-      </Button>
+      <Link href="/revenue" passHref>
+        <Button variant="danger" type="button" size="lg" className="copy-btn">
+          View Revenue
+        </Button>
+        <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
+          Sign Out
+        </Button>
+      </Link>
     </div>
   );
 }
