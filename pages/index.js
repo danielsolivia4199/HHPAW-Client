@@ -1,6 +1,6 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
@@ -9,30 +9,20 @@ function Home() {
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
       style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
+        height: '90vh', padding: '30px', maxWidth: '400px', margin: '0 auto',
       }}
     >
-      <h1>Hello {user.fbUser.displayName}! </h1>
+      <h1>Hello {user.fbUser.displayName}!</h1>
       <Link href="/orders" passHref>
-        <Button variant="danger" type="button" size="lg" className="copy-btn">
-          View Orders
-        </Button>
+        <a><Button variant="danger" type="button" size="lg" className="copy-btn">View Orders</Button></a>
       </Link>
+
       <Link href="/orders/new" passHref>
-        <Button variant="danger" type="button" size="lg" className="copy-btn">
-          Create Order
-        </Button>
+        <a><Button variant="danger" type="button" size="lg" className="copy-btn">Create Order</Button></a>
       </Link>
+
       <Link href="/revenue" passHref>
-        <Button variant="danger" type="button" size="lg" className="copy-btn">
-          View Revenue
-        </Button>
-        <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
-          Sign Out
-        </Button>
+        <a><Button variant="danger" type="button" size="lg" className="copy-btn">View Revenue</Button></a>
       </Link>
     </div>
   );
