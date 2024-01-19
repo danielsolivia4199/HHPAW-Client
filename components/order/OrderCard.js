@@ -14,31 +14,36 @@ export default function OrderCard({ orderObj, onUpdate }) {
     }
   };
 
+  const statusStyle = {
+    color: orderObj.is_closed ? 'red' : 'green',
+  };
+
   return (
     <>
-      <Card className="text-center">
+      <Card className="order-card">
         <Card.Header>Order #{orderObj.id}</Card.Header>
         <Card.Body>
           <Card.Title>{orderObj.customer_name}</Card.Title>
           <Card.Title>{orderObj.customer_email}</Card.Title>
           <Card.Text>{orderObj.customer_phone}</Card.Text>
           <Card.Text>{orderObj.order_type}</Card.Text>
-          <Card.Text>
-            Status: {orderObj.is_closed ? 'Closed' : 'Open'}
+          <Card.Text style={statusStyle}>
+            {orderObj.is_closed ? 'Closed' : 'Open'}
           </Card.Text>
           {!orderObj.is_closed && (
             <>
               <Link href={`/orders/${orderObj.id}`} passHref>
-                <Button variant="primary" as="a">Order Details</Button>
+                <Button variant="danger" as="a" style={{ marginRight: '4px' }}>Order Details</Button>
               </Link>
               <Button
-                variant="primary"
+                variant="danger"
+                style={{ marginRight: '4px' }}
                 onClick={() => {
                   router.push(`/orders/edit/${orderObj.id}`);
                 }}
               >Edit
               </Button>
-              <Button variant="primary" onClick={deleteThisOrder}>Delete</Button>
+              <Button variant="danger" onClick={deleteThisOrder} style={{ marginRight: '2px' }}>Delete</Button>
             </>
           )}
         </Card.Body>

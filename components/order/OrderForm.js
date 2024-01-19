@@ -45,7 +45,7 @@ const OrderForm = ({ orderObj }) => {
     try {
       if (orderObj.id) {
         await updateOrder(currentOrder, user.uid);
-        router.push(`/orders/${orderObj.id}`);
+        router.push('/orders');
       } else {
         const newOrder = await createOrder(currentOrder, user.uid);
         router.push(`/orders/${newOrder.id}`);
@@ -57,34 +57,37 @@ const OrderForm = ({ orderObj }) => {
 
   return (
     <>
-      <h3>{orderObj.id ? 'Update Order' : 'Create Order'}</h3>
+      <h1 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>{orderObj.id ? 'Update Order' : 'Create Order'}</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
-          <Form.Label>Cutsomer Name</Form.Label>
-          <Form.Control name="customerName" required value={currentOrder.customerName} onChange={handleChange} />
+          <Form.Label htmlFor="customerName">Customer Name</Form.Label>
+          <Form.Control id="customerName" name="customerName" required value={currentOrder.customerName} onChange={handleChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Customer Email</Form.Label>
-          <Form.Control name="customerEmail" required value={currentOrder.customerEmail} onChange={handleChange} />
+          <Form.Label htmlFor="customerEmail">Customer Email</Form.Label>
+          <Form.Control id="customerEmail" name="customerEmail" required value={currentOrder.customerEmail} onChange={handleChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Customer Phone</Form.Label>
-          <Form.Control name="customerPhone" required value={currentOrder.customerPhone} onChange={handleChange} />
+          <Form.Label htmlFor="customerPhone">Customer Phone</Form.Label>
+          <Form.Control id="customerPhone" name="customerPhone" required value={currentOrder.customerPhone} onChange={handleChange} />
         </Form.Group>
         <Form.Group className="mb-3">
-          <Form.Label>Order Type</Form.Label>
-          <Form.Select name="orderType" required value={currentOrder.orderType} onChange={handleChange}>
+          <Form.Label htmlFor="orderType">Order Type</Form.Label>
+          <Form.Select id="orderType" name="orderType" required value={currentOrder.orderType} onChange={handleChange}>
             <option value="">Select Order Type</option>
             <option value="In-Person">In-Person</option>
-            <option value="Online">Online</option>
             <option value="Phone">Phone</option>
             <option value="Delivery">Delivery</option>
           </Form.Select>
-
         </Form.Group>
-        <Button variant="primary" type="submit">
-          {orderObj.id ? 'Update Order' : 'Create Order'}
-        </Button>
+        <div style={{
+          display: 'flex', justifyContent: 'center', marginTop: '30px', marginBottom: '20px',
+        }}
+        >
+          <Button variant="primary" size="lg" type="submit">
+            {orderObj.id ? 'Update Order' : 'Create Order'}
+          </Button>
+        </div>
       </Form>
     </>
   );

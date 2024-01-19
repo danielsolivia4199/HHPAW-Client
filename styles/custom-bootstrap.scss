@@ -1,0 +1,12 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+$theme-colors: (
+  "dark": #BB3E00,
+  "danger": #BB3E00,
+  "primary": #F7AD45,
+  "success": #5F8D37,
+);
+
+
+@import '~bootstrap/scss/bootstrap';

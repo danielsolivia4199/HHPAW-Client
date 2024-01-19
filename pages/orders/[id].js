@@ -1,8 +1,10 @@
+/* eslint-disable global-require */
 /* eslint-disable no-shadow */
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
+import moment from 'moment-timezone/moment-timezone-utils';
 import { getOrderItems, deleteOrderItem } from '../../utils/data/orderItemData';
 import { closeOrder } from '../../utils/data/orderData';
 import { createRevenue } from '../../utils/data/revenueData';
@@ -25,13 +27,14 @@ const OrderDetails = () => {
   const handleSubmitCloseOrder = ({ tip, paymentType }) => {
     closeOrder(id)
       .then(() => {
-        const currentDate = new Date().toISOString().split('T')[0];
+        const timezone = 'America/Chicago';
+        const currentDate = moment().tz(timezone);
         const revenueData = {
           order: parseInt(id, 10),
           tip_amount: parseFloat(tip).toFixed(2),
           payment_type: paymentType,
           order_amount: orderTotal.toString(),
-          date: currentDate,
+          date: currentDate.format('YYYY-MM-DD'),
         };
 
         createRevenue(revenueData)
@@ -61,10 +64,16 @@ const OrderDetails = () => {
     }
   }, [id]);
 
+  useEffect(() => {
+    const total = orderItems.reduce((sum, item) => sum + parseFloat(item.item.price), 0);
+    setOrderTotal(total);
+  }, [orderItems]);
+
   const handleDeleteFromOrder = (itemId) => {
     deleteOrderItem(itemId)
       .then(() => {
-        setOrderItems(orderItems.filter((item) => item.id !== itemId));
+        const updatedItems = orderItems.filter((item) => item.id !== itemId);
+        setOrderItems(updatedItems);
       })
       .catch((error) => {
         console.error('Error deleting order item:', error);
@@ -82,27 +91,38 @@ const OrderDetails = () => {
 
   return (
     <div>
-      <h2>Details for Order #{id}</h2>
-      <Link href={`/items/menu?orderId=${id}`} passHref>
-        <Button variant="primary" as="a">Add Item</Button>
-      </Link>
-      {orderItems.map((orderItem) => (
-        <ItemCard
-          key={orderItem.id}
-          item={orderItem.item}
-          showAddButton={false}
-          showDeleteButton
-          onDeleteFromOrder={() => handleDeleteFromOrder(orderItem.id)}
-        />
-      ))}
-      <Button variant="success" onClick={handleCloseOrder}>Close Order</Button>
+      <h1 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>Details for Order #{id}</h1>
+      <div className="item-cards-container">
+        {orderItems.map((orderItem) => (
+          <ItemCard
+            key={orderItem.id}
+            item={orderItem.item}
+            showAddButton={false}
+            showDeleteButton
+            onDeleteFromOrder={() => handleDeleteFromOrder(orderItem.id)}
+          />
+        ))}
+      </div>
+      <h2 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}> Total: ${orderTotal.toFixed(2)}</h2>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        marginBottom: '30px',
+        marginTop: '30px',
+      }}
+      >
+        <Link href={`/items/menu?orderId=${id}`} passHref>
+          <Button variant="primary" size="lg" as="a">Add Item</Button>
+        </Link>
+        <span style={{ marginRight: '10px' }} />
+        <Button variant="success" size="lg" onClick={handleCloseOrder}>Close Order</Button>
+      </div>
       <CloseOrderModal
         show={showCloseOrderModal}
         onHide={() => setShowCloseOrderModal(false)}
         onSubmit={handleSubmitCloseOrder}
         orderTotal={orderTotal}
       />
-      <h2>Order Total: ${orderTotal.toFixed(2)}</h2>
     </div>
   );
 };

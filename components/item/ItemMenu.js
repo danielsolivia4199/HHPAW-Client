@@ -52,17 +52,23 @@ const ItemsMenu = () => {
 
   return (
     <div>
-      <h2>Menu</h2>
+      <h1 style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>Menu</h1>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <Button onClick={handleReturnToOrder} variant="success" size="lg" style={{ marginBottom: '10px' }}>
+          Return to Order
+        </Button>
+      </div>
       <InputGroup className="mb-3">
         <FormControl
           placeholder="Search items"
           onChange={handleSearchChange}
         />
       </InputGroup>
-      <Button onClick={handleReturnToOrder} variant="secondary">Return to Order</Button>
-      {filteredItems.map((item) => (
-        <ItemCard key={item.id} item={item} showAddButton onAddToOrder={() => addItemToOrder(orderId, item.id)} />
-      ))}
+      <div className="item-cards-container">
+        {filteredItems.map((item) => (
+          <ItemCard key={item.id} item={item} showAddButton onAddToOrder={() => addItemToOrder(orderId, item.id)} />
+        ))}
+      </div>
     </div>
   );
 };

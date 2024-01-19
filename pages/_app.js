@@ -1,11 +1,12 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/prop-types */
-import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/globals.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from '../utils/context/authContext';
 import ViewDirectorBasedOnUserAuthStatus from '../utils/ViewDirector';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../styles/globals.css';
+import '../styles/custom-bootstrap.scss';
 
 function MyApp({ Component, pageProps }) {
   return (

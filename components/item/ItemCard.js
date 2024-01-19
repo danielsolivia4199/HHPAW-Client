@@ -22,15 +22,15 @@ export default function ItemCard({
   };
 
   return (
-    <Card className="text-center">
+    <Card className="item-card">
       <Card.Header>{item.name}</Card.Header>
       <Card.Body>
         <Card.Title>{item.price}</Card.Title>
         {showAddButton && (
-          <Button variant="primary" onClick={handleAddToOrder}>Add to Order</Button>
+          <Button variant="primary" onClick={handleAddToOrder}>Add</Button>
         )}
         {showDeleteButton && (
-          <Button variant="danger" onClick={handleDeleteFromOrder}>Remove from Order</Button>
+          <Button variant="danger" onClick={handleDeleteFromOrder}>Remove</Button>
         )}
       </Card.Body>
     </Card>

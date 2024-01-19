@@ -11,10 +11,10 @@ import { signOut } from '../utils/auth';
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" className="custom-navbar">
       <Container>
         <Link passHref href="/">
-          <Navbar.Brand>Hip Hop Pizza and Wangs</Navbar.Brand>
+          <Navbar.Brand className="custom-navbar-text">Hip Hop Pizza and Wangs</Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
@@ -29,7 +29,10 @@ export default function NavBar() {
             <Link passHref href="/orders/new">
               <Nav.Link>Create Order</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>
+            <Link passHref href="/revenue">
+              <Nav.Link>Revenue</Nav.Link>
+            </Link>
+            <Button variant="primary" size="sm" onClick={signOut}>
               Sign Out
             </Button>
           </Nav>

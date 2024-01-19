@@ -7,18 +7,18 @@ function RevenueCard({
 }) {
   return (
     <Card className="text-center">
-      <Card.Header as="h5">Revenue Statistics</Card.Header>
+      <Card.Header as="h5" className="header-style">Revenue Statistics</Card.Header>
       <Card.Body>
-        <Card.Title>Total Revenue: ${totalRevenue.toFixed(2)}</Card.Title>
-        <Card.Text>Total Tips: ${totalTips.toFixed(2)}</Card.Text>
+        <Card.Title className="title-style">Total Revenue: ${totalRevenue.toFixed(2)}</Card.Title>
+        <Card.Text className="text-style">Total Tips: ${totalTips.toFixed(2)}</Card.Text>
         <div>
-          <h6>Payment Type Breakdown</h6>
+          <h5>Payment Type Breakdown</h5>
           {Object.entries(paymentTypeCounts).map(([paymentType, count]) => (
-            <div key={paymentType}>{paymentType}: {count}</div>
+            <div key={paymentType} className="payment-type-style">{paymentType}: {count}</div>
           ))}
         </div>
 
-        <Card.Text>
+        <Card.Text className="date-range-style">
           <strong>Date Range:</strong> {firstDate} to {lastDate}
         </Card.Text>
       </Card.Body>

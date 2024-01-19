@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { clientCredentials } from '../client';
 
 const getOrders = () => new Promise((resolve, reject) => {
@@ -31,20 +32,30 @@ const createOrder = (order, userId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateOrder = (orderData) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/orders/${orderData.id}`, {
+const updateOrder = (payload, uid) => new Promise((resolve, reject) => {
+  const updatedPayload = {
+    ...payload,
+    employee: payload.employee || uid,
+  };
+
+  fetch(`${clientCredentials.databaseURL}/orders/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `${uid}`,
     },
-    body: JSON.stringify({ is_closed: orderData.is_closed }),
+    body: JSON.stringify(updatedPayload),
   })
     .then((response) => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      resolve();
+      if (response.status === 204 || response.headers.get('content-length') === '0') {
+        return null;
+      }
+      return response.json();
     })
+    .then((data) => resolve(data))
     .catch(reject);
 });
 
