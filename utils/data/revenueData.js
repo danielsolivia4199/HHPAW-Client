@@ -21,7 +21,6 @@ const getRevenues = () => new Promise((resolve, reject) => {
 });
 
 const createRevenue = (revenue) => new Promise((resolve, reject) => {
-  console.log('Sending Revenue Data:', revenue);
   fetch(`${clientCredentials.databaseURL}/revenues`, {
     method: 'POST',
     headers: {
