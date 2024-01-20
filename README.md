@@ -1,19 +1,21 @@
-# React/Next.js Django Auth Template
+# Hip Hop, Pizza, and Wangs Point of Sale System
 
-## Topics
-- [Get Started](#getting-started)
-- [Starting the Project](#starting-the-project)
+Hip Hop, Pizza, and Wangs is a community loved restaurant that's stepping into the digital age. This repository is for a POS system that is designed to streamlie their operations and integrate modern technology into their company. 
+
+## Project Description
+
+This POS system is a comprehensive solution for managing orders, tracking revenue, and enhancing customer service efficiency at Hip Hop, Pizza, and Wangs. The objective is to provide a user-friendly platform allowing employees to take orders and record revenue to suit the resturants unique needs.
 ___
-## Getting Started
-### Use Template
-#### 1. To get started, click the GREEN "Use this Template" button at the top of the repo
-<img width="915" alt="Screen Shot 2022-07-06 at 12 54 01 PM" src="https://user-images.githubusercontent.com/29741570/177612998-4aac9237-5a1e-4f13-8ae0-468587521564.png">
+## Features
+User Authentication: Secure login for cashiers using Firebase.
+Home Screen Display: Welcome screen with options to view and create orders, and view revenue.
+Order Management: View all orders, see details, add or delete orders.
+Item Management: Add or delete items from orders.
+Revenue Tracking: Close orders with payment details and tips, view total revenue.
 
-#### 2. Make sure YOUR github account is selected in the dropdown and name your project
-<img width="763" alt="Screen Shot 2022-07-06 at 12 54 48 PM" src="https://user-images.githubusercontent.com/29741570/177613126-dd38f678-7553-4f27-8a4a-75680f14d71e.png">
+# Installation 
 
-#### 3. Clone your new repo to your local machine
-#### 4. Go to the **NEXT** section
+Clone This Repository
 
 ## Starting the Project
 1. Create a Firebase project and set up authentication. Use [these videos](https://vimeo.com/showcase/codetracker-firebase) as a refresher if needed.
@@ -42,3 +44,8 @@ To learn more about Next.js, take a look at the following resources:
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+## Author
+Olivia Daniels
+GitHub: https://github.com/danielsolivia4199
+LinkedIn: https://www.linkedin.com/in/olivia-daniels-962b47275/
